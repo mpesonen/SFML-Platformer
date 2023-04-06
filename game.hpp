@@ -1,5 +1,4 @@
-#ifndef GAME_HPP
-#define GAME_HPP
+#pragma once
 
 #include <memory>
 #include <typeinfo>
@@ -87,5 +86,3 @@ public:
     void reset();
     void run();
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef PLAYER_HPP
-#define PLAYER_HPP
+#pragma once
 
 #include "entity.hpp"
 #include "constants.hpp"
@@ -21,5 +20,3 @@ public:
     void moveLeft() noexcept override;
     void moveRight() noexcept override;
 };
-
-#endif

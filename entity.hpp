@@ -1,5 +1,4 @@
-#ifndef ENTITY_HPP
-#define ENTITY_HPP
+#pragma once
 
 #include <SFML/Graphics.hpp>
 
@@ -31,5 +30,3 @@ public:
     virtual void moveLeft() noexcept = 0;
     virtual void moveRight() noexcept = 0;
 };
-
-#endif

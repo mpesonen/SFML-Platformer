@@ -1,5 +1,4 @@
-#ifndef BRICK_HPP
-#define BRICK_HPP
+#pragma once
 
 #include "entity.hpp"
 #include "constants.hpp"
@@ -13,5 +12,3 @@ public:
     void draw(sf::RenderWindow& window) override;
     void update() override;
 };
-
-#endif

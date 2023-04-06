@@ -1,5 +1,4 @@
-#ifndef CONSTANTS
-#define CONSTANTS
+#pragma once
 
 class constants {
 public:
@@ -9,5 +8,3 @@ public:
     static constexpr int window_height {786};
     static constexpr float playerSpeed {12.0f};
 };
-
-#endif
