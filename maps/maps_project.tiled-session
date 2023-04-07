@@ -27,7 +27,7 @@
     "last.exportedFilePath": "/Users/mattipesonen/Programming/SFML-Platformer/maps",
     "last.imagePath": "/Users/mattipesonen/Programming/SFML-Platformer/maps",
     "map.height": 25,
-    "map.lastUsedExportFilter": "CSV files (*.csv)",
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "json",
     "map.width": 120,
     "openFiles": [

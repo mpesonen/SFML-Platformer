@@ -15,10 +15,12 @@ Map::Map(std::string path) {
     {
         for (int idxW = 0; idxW < width; idxW++)
         {
-            int unWrapped = idxH * height + idxW;
-            this->mapTiles.insert({std::make_tuple(idxW, idxH), dataVector[unWrapped]});
-
-            std::cout << dataVector[unWrapped] << ", ";
+            int unWrapped = idxH * width + idxW;
+            if (unWrapped != 0)
+            {
+                this->mapTiles.insert({std::make_tuple(idxW, idxH), dataVector[unWrapped]});
+                //std::cout << idxH << "," << idxW << ": " << dataVector[unWrapped] << " | ";
+            }
         }
     }
 }
@@ -36,4 +38,9 @@ int Map::getHeight()
 int Map::getTileAt(int x, int y)
 {
     return this->mapTiles[std::make_tuple(x, y)];
+}
+
+std::map<std::tuple<int, int>, int> Map::getMapTiles()
+{
+    return this->mapTiles;
 };

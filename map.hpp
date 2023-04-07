@@ -28,4 +28,5 @@ public:
     int getWidth();
     int getHeight();
     int getTileAt(int x, int y);
+    std::map<std::tuple<int, int>, int> getMapTiles();
 };
