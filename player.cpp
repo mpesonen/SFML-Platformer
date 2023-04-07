@@ -5,10 +5,12 @@ sf::Texture Player::texture;
 
 Player::Player(float x, float y) : MovingEntity() {
     // TODO: file operations might be slow
-    texture.loadFromFile("./textures/mario1.png");
-    sprite.setTexture(texture);
-
-    sprite.setPosition(x, y);
+    auto success = texture.loadFromFile("./textures/mario1.png");
+    if  (success)
+    {
+        sprite.setTexture(texture);
+        sprite.setPosition(sf::Vector2f{x, y});
+    }
 }
 
 void Player::update()

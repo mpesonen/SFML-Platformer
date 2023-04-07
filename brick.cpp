@@ -1,15 +1,17 @@
 #include "brick.hpp"
 
-
 // Initialize static data
 sf::Texture Brick::texture;
 
 Brick::Brick(float x, float y) : Entity()
 {
     // TODO: file operations might be slow
-    texture.loadFromFile("./textures/brick01.png");
-    sprite.setTexture(texture);
-    sprite.setPosition(x, y);
+    auto success = texture.loadFromFile("./textures/brick01.png");
+    if (success)
+    {
+        sprite.setTexture(texture, true);
+        sprite.setPosition(sf::Vector2f{x, y});
+    }
 }
 
 void Brick::draw(sf::RenderWindow &window)

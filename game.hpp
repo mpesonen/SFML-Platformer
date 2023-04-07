@@ -8,6 +8,9 @@
 #include "player.hpp"
 #include "brick.hpp"
 #include "constants.hpp"
+#include "map.hpp"
+
+using namespace std::literals;
 
 class EntityManager {
 private:
@@ -72,15 +75,23 @@ public:
 class Game {
     enum class GameState { paused, running };
 
-    sf::RenderWindow gameWindow{{constants::window_width, constants::window_height},
-		"SFML Platformer"};
+    //sf::RenderWindow gameWindow{{constants::window_width, constants::window_height},
+	//	"SFML Platformer"};
 
+    sf::RenderWindow gameWindow{sf::VideoMode{sf::Vector2u {800, 600}}, "SFML Platformer"};
+
+    //sf::RenderWindow gameWindow(sf::VideoMode{1024, 768},
+    //             "SFML Platformer"s);
+                 //std::uint32_t          style    = Style::Default,
+                 //const ContextSettings& settings = ContextSettings());
     EntityManager entityManager;
 
-    sf::Font robotoFont;
-    sf::Text stateText;
+    //sf::Font robotoFont;
+    //sf::Text stateText;
     
     GameState gameState{GameState::paused};
+
+    std::unique_ptr<Map> level;
 public:
     Game();
     void reset();

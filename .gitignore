@@ -1,4 +1,6 @@
 .vscode
 .DS_Store
-.dch
+*.gch
 main.dSYM
+*.out
+build/

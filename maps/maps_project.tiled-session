@@ -1,0 +1,40 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "map01.json": {
+            "scale": 0.25,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 4390,
+                "y": 1936
+            }
+        },
+        "map01.tmj": {
+            "scale": 0.42,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1920.2380952380952,
+                "y": 399.9999999999998
+            }
+        }
+    },
+    "last.exportedFilePath": "/Users/mattipesonen/Programming/SFML-Platformer/maps",
+    "last.imagePath": "/Users/mattipesonen/Programming/SFML-Platformer/maps",
+    "map.height": 25,
+    "map.lastUsedExportFilter": "CSV files (*.csv)",
+    "map.lastUsedFormat": "json",
+    "map.width": 120,
+    "openFiles": [
+    ],
+    "project": "maps_project.tiled-project",
+    "recentFiles": [
+        "map01.json"
+    ],
+    "tileset.lastUsedFormat": "tsx"
+}
