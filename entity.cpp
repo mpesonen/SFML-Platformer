@@ -10,9 +10,14 @@ sf::FloatRect Entity::getGlobalBounds() const noexcept
     return sprite.getGlobalBounds();
 }
 
+void Entity::resetCollisionDirections() noexcept
+{
+    this->collisionDirections = Constants::DIRECTION_NONE;
+}
+
 void Entity::setCollisionDirections(unsigned char directions) noexcept
 {
-    this->collisionDirections = directions;
+    this->collisionDirections |= directions;
 }
 
 bool Entity::isCollidingFromRight()

@@ -15,7 +15,7 @@ public:
     void update() override;
     void draw(sf::RenderWindow& window) override;
 
-    void moveUp() noexcept override;
+    void jump() noexcept override;
     void moveDown() noexcept override;
     void moveLeft() noexcept override;
     void moveRight() noexcept override;

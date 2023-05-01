@@ -49,7 +49,7 @@ void Player::draw(sf::RenderWindow& window)
     window.draw(sprite);
 }
 
-void Player::moveUp() noexcept
+void Player::jump() noexcept
 {
     velocity.y += 2.25f * -Constants::playerSpeed;
 }
@@ -96,9 +96,9 @@ void Player::processInput()
     
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
     {
-        if (!isCollidingFromTop() && isCollidingFromBottom() && y() >= 0.f)
+        if (!isCollidingFromTop() && isCollidingFromBottom() && velocity.y == 0 && y() >= 0.f)
         {
-            moveUp();
+            jump();
         }
     }
 }
