@@ -19,4 +19,9 @@ public:
     void moveDown() noexcept override;
     void moveLeft() noexcept override;
     void moveRight() noexcept override;
+
+    void nudgeLeft(float amount) noexcept;
+    void nudgeRight(float amount) noexcept;
+    void nudgeUp(float amount) noexcept;
+    void nudgeDown(float amount) noexcept; 
 };

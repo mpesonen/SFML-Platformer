@@ -8,6 +8,10 @@ void EntityManager::refresh()
 
 void EntityManager::clear()
 {
+    for (auto& e : allEntities)
+    {
+        e->destroy();
+    }
 }
 
 void EntityManager::update()
@@ -122,7 +126,6 @@ void Game::run()
 		    break;
         }
 
-        //gameWindow.draw(stateText);
         entityManager.update();
         entityManager.apply_all<Player>([this](auto& player) {
             entityManager.apply_all<Brick>([&player](auto& brick) {
@@ -133,11 +136,6 @@ void Game::run()
         auto playerPos = entityManager.get_all<Player>()[0]->getPosition();
         view.setCenter(sf::Vector2f{playerPos.x, Constants::window_height / 2.f});
         gameWindow.setView(view);
-
-        if (playerPos.y > Constants::window_height)
-        {
-            playerPos.y = 0;
-        }
 
         entityManager.refresh();
         entityManager.draw(gameWindow);

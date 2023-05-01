@@ -21,7 +21,7 @@ public:
     bool isCollidingFromBottom();
     bool isCollidingFromLeft();
     bool isCollidingFromTop();
-
+    
     float x() const noexcept;
     float y() const noexcept;
 

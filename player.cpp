@@ -102,3 +102,23 @@ void Player::processInput()
         }
     }
 }
+
+void Player::nudgeLeft(float amount) noexcept
+{
+    sprite.move(sf::Vector2f{-amount, 0});
+}
+
+void Player::nudgeRight(float amount) noexcept
+{
+    sprite.move(sf::Vector2f{amount, 0});
+}
+
+void Player::nudgeUp(float amount) noexcept
+{
+    sprite.move(sf::Vector2f{0, -amount});
+}
+
+void Player::nudgeDown(float amount) noexcept
+{
+    sprite.move(sf::Vector2f{0, amount});
+}

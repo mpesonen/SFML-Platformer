@@ -14,18 +14,22 @@ void handle_collision(Player& player, Brick& brick) {
     if (angle >= 45.f && angle < 135.f)
     {
       player.setCollisionDirections(Constants::DIRECTION_BOTTOM);
+      player.nudgeUp(collision->height);
     }
     else if (angle >= -45.f && angle < 45.f)
     {
       player.setCollisionDirections(Constants::DIRECTION_RIGHT);
+      player.nudgeLeft(collision->width);
     }
     else if (angle >= -135.f && angle < -45.f)
     {
       player.setCollisionDirections(Constants::DIRECTION_TOP);
+      player.nudgeDown(collision->height);
     }
     else if (angle >= 135.f || angle < -135.f)
     {
       player.setCollisionDirections(Constants::DIRECTION_LEFT);
+      player.nudgeRight(collision->width);
     }
   }
 }
