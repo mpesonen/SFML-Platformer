@@ -23,7 +23,7 @@ void handle_collision(Player& player, Brick& brick) {
     {
       player.setCollisionDirections(Constants::DIRECTION_TOP);
     }
-    else if (angle >= 135.f && angle < -135.f)
+    else if (angle >= 135.f || angle < -135.f)
     {
       player.setCollisionDirections(Constants::DIRECTION_LEFT);
     }

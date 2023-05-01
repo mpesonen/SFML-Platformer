@@ -15,7 +15,30 @@ Player::Player(float x, float y) : MovingEntity() {
 
 void Player::update()
 {
+
+    if (!isCollidingFromBottom())
+    {
+        velocity.y += 2.f;
+    }
+    else
+    {
+        velocity.y = 0.f;
+    }
+
+    float startVel = velocity.x;
+
     processInput();
+
+    int width = sprite.getGlobalBounds().width;
+    int height = sprite.getGlobalBounds().height;
+
+    if (velocity.x < 0 && startVel >= 0)
+    {
+        sprite.setTextureRect(sf::IntRect{sf::Vector2i{width, 0}, sf::Vector2i{-width, height}});
+    } else if (velocity.x > 0 && startVel <= 0)
+    {
+        sprite.setTextureRect(sf::IntRect{sf::Vector2i{0, 0}, sf::Vector2i{width, height}});
+    }
 
     // Move the position of the player
     sprite.move(velocity);
@@ -28,7 +51,7 @@ void Player::draw(sf::RenderWindow& window)
 
 void Player::moveUp() noexcept
 {
-    velocity.y = -Constants::playerSpeed;
+    velocity.y += 2.25f * -Constants::playerSpeed;
 }
 
 void Player::moveDown() noexcept
@@ -73,24 +96,9 @@ void Player::processInput()
     
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
     {
-        if (!isCollidingFromTop() && y() >= 0.f)
+        if (!isCollidingFromTop() && isCollidingFromBottom() && y() >= 0.f)
         {
             moveUp();
         }
-        else
-            velocity.y = 0;
-    }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
-    {
-        if (!isCollidingFromBottom() && y() <= 17.f * Constants::tileDimension)
-        {
-            moveDown();
-        }
-        else
-            velocity.y = 0;
-    }
-    else
-    {
-        velocity.y = 0;
     }
 }
