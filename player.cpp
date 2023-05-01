@@ -28,27 +28,29 @@ void Player::draw(sf::RenderWindow& window)
 
 void Player::moveUp() noexcept
 {
+    velocity.y = -Constants::playerSpeed;
 }
 
 void Player::moveDown() noexcept
 {
+    velocity.y = Constants::playerSpeed;
 }
 
 void Player::moveLeft() noexcept
 {
-    velocity.x = -constants::playerSpeed;
+    velocity.x = -Constants::playerSpeed;
 }
 
 void Player::moveRight() noexcept
 {
-    velocity.x = constants::playerSpeed;
+    velocity.x = Constants::playerSpeed;
 }
 
 void Player::processInput()
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
     {
-        if (x() >=0)
+        if (!isCollidingFromLeft() && x() >=0)
         {
             moveLeft();
         }
@@ -57,7 +59,7 @@ void Player::processInput()
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
     {
-        if (x() <= constants::window_width)
+        if (!isCollidingFromRight() && x() <= 94.f * Constants::tileDimension)
         {
             moveRight();
         }
@@ -65,5 +67,30 @@ void Player::processInput()
             velocity.x = 0;
     }
     else
+    {
         velocity.x = 0;
+    }
+    
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+    {
+        if (!isCollidingFromTop() && y() >= 0.f)
+        {
+            moveUp();
+        }
+        else
+            velocity.y = 0;
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+    {
+        if (!isCollidingFromBottom() && y() <= 17.f * Constants::tileDimension)
+        {
+            moveDown();
+        }
+        else
+            velocity.y = 0;
+    }
+    else
+    {
+        velocity.y = 0;
+    }
 }

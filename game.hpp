@@ -76,7 +76,7 @@ class Game {
     enum class GameState { paused, running };
 
     sf::RenderWindow gameWindow{
-        sf::VideoMode{sf::Vector2u {constants::window_width, constants::window_height}},
+        sf::VideoMode{sf::Vector2u {Constants::window_width, Constants::window_height}},
         "SFML Platformer"};
 
     EntityManager entityManager;

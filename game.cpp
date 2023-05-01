@@ -1,4 +1,5 @@
 #include "game.hpp"
+#include "interactions.hpp"
 #include <iostream>
 
 void EntityManager::refresh()
@@ -15,6 +16,14 @@ void EntityManager::update()
     {
         e->update();
     }
+
+    auto player = this->get_all<Player>()[0];
+    player->setCollisionDirections(Constants::DIRECTION_NONE);
+
+    for (auto& brick : groupedEntities)
+    {
+
+    }
 }
 
 void EntityManager::draw(sf::RenderWindow &window)
@@ -27,7 +36,7 @@ void EntityManager::draw(sf::RenderWindow &window)
 
 Game::Game()
 {
-    gameWindow.setFramerateLimit(constants::frameRate);
+    gameWindow.setFramerateLimit(Constants::frameRate);
     
     auto robotoFont = sf::Font();
     auto success = robotoFont.loadFromFile("./fonts/Roboto-Regular.ttf");
@@ -36,7 +45,7 @@ Game::Game()
     if (success)
     {
         stateText->setFont(robotoFont);
-        stateText->setPosition(sf::Vector2f{constants::window_width / 2.f, 100.f});
+        stateText->setPosition(sf::Vector2f{Constants::window_width / 2.f, 100.f});
         stateText->setCharacterSize(35);
         stateText->setFillColor(sf::Color::White);
         stateText->setString("Paused");
@@ -66,14 +75,14 @@ void Game::reset()
             case 1:
                 std::cout << "\nPlayer at: " << std::get<0>(tile.first) << "," << std::get<1>(tile.first) << "\n";
                 entityManager.create<Player>(
-                    static_cast<float>(std::get<0>(tile.first)) * constants::tileDimension, 
-                    static_cast<float>(std::get<1>(tile.first)) * constants::tileDimension);
+                    static_cast<float>(std::get<0>(tile.first)) * Constants::tileDimension, 
+                    static_cast<float>(std::get<1>(tile.first)) * Constants::tileDimension);
                 break;
             case 2:
                 std::cout << "\nBrick at: " << std::get<0>(tile.first) << "," << std::get<1>(tile.first) << "\n";
                 entityManager.create<Brick>(
-                    static_cast<float>(std::get<0>(tile.first)) * constants::tileDimension, 
-                    static_cast<float>(std::get<1>(tile.first)) * constants::tileDimension);
+                    static_cast<float>(std::get<0>(tile.first)) * Constants::tileDimension, 
+                    static_cast<float>(std::get<1>(tile.first)) * Constants::tileDimension);
                 break;
         }
     }
@@ -83,8 +92,6 @@ void Game::reset()
         for (int idxW = 0; idxW < this->level->getWidth(); ++idxW)
         {
             int currentTile = this->level->getTileAt(idxW, idxH);
-
-
         }
 
         std::cout <<  "\n";
@@ -94,6 +101,11 @@ void Game::reset()
 
 void Game::run()
 {
+    // View for enabling scrolling
+    sf::View view;
+    view.reset(sf::FloatRect(sf::Vector2f{0.f, 0.f}, sf::Vector2f{Constants::window_width, Constants::window_height}));
+    view.setViewport(sf::FloatRect(sf::Vector2f{0.f, 0.f}, sf::Vector2f{1.0f, 1.0f}));
+
     while (gameWindow.isOpen()) {
 		// Clear the screen
 		gameWindow.clear(sf::Color::Black);
@@ -112,8 +124,17 @@ void Game::run()
         }
 
         //gameWindow.draw(stateText);
-
         entityManager.update();
+        entityManager.apply_all<Player>([this](auto& player) {
+            entityManager.apply_all<Brick>([&player](auto& brick) {
+                handle_collision(player, brick);
+            });
+        });
+        
+        auto playerPos = entityManager.get_all<Player>()[0]->getPosition();
+        view.setCenter(sf::Vector2f{playerPos.x, Constants::window_height / 2.f});
+        gameWindow.setView(view);
+
         entityManager.refresh();
         entityManager.draw(gameWindow);
 

@@ -19,7 +19,6 @@ Map::Map(std::string path) {
             if (unWrapped != 0)
             {
                 this->mapTiles.insert({std::make_tuple(idxW, idxH), dataVector[unWrapped]});
-                //std::cout << idxH << "," << idxW << ": " << dataVector[unWrapped] << " | ";
             }
         }
     }

@@ -19,7 +19,8 @@ set(EXECUTABLE_SOURCES
     "entity.cpp"
     "game.cpp"
     "map.cpp"
-    "player.cpp")
+    "player.cpp"
+    "interactions.cpp")
 
 set(EXECUTABLE_HEADERS
     "brick.hpp"
@@ -27,7 +28,8 @@ set(EXECUTABLE_HEADERS
     "entity.hpp"
     "game.hpp"
     "map.hpp"
-    "player.hpp")
+    "player.hpp"
+    "interactions.hpp")
 
 add_executable(${EXECUTABLE_NAME}
     ${EXECUTABLE_SOURCES}
