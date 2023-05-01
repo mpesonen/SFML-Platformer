@@ -23,6 +23,7 @@ void handle_collision(Player& player, Brick& brick) {
     }
     else if (angle >= -135.f && angle < -45.f)
     {
+      brick.destroy();
       player.setCollisionDirections(Constants::DIRECTION_TOP);
       player.nudgeDown(collision->height);
     }

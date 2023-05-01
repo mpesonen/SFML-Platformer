@@ -4,6 +4,21 @@
 
 void EntityManager::refresh()
 {
+    // We must clean up the alias pointers first, to avoid dangling pointers
+	// We simply remove them from their vector
+    for (auto& [type, alias_vector] : groupedEntities)
+    {
+		alias_vector.erase(remove_if(begin(alias_vector), end(alias_vector),
+				[](const auto& p) { return p->isDestroyed(); }
+				),
+		end(alias_vector));    
+    }
+
+    // Now we can safely destroy the objects, now that there are no aliases to them
+	allEntities.erase(remove_if(begin(allEntities), end(allEntities),
+			[](const auto& p) { return p->isDestroyed(); }
+			),
+	end(allEntities));
 }
 
 void EntityManager::clear()

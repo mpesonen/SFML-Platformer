@@ -51,7 +51,7 @@ void Player::draw(sf::RenderWindow& window)
 
 void Player::jump() noexcept
 {
-    velocity.y += 2.25f * -Constants::playerSpeed;
+    velocity.y += 2.3f * -Constants::playerSpeed;
 }
 
 void Player::moveDown() noexcept
@@ -120,5 +120,6 @@ void Player::nudgeUp(float amount) noexcept
 
 void Player::nudgeDown(float amount) noexcept
 {
+    velocity.y = 0.f;
     sprite.move(sf::Vector2f{0, amount});
 }
