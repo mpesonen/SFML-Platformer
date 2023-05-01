@@ -21,6 +21,8 @@ public:
     bool isCollidingFromBottom();
     bool isCollidingFromLeft();
     bool isCollidingFromTop();
+
+    void setPosition(sf::Vector2f position) noexcept;
     
     float x() const noexcept;
     float y() const noexcept;

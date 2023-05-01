@@ -59,3 +59,8 @@ bool Entity::isDestroyed() const noexcept
 {
     return destroyed;
 }
+
+void Entity::setPosition(sf::Vector2f position) noexcept
+{
+    sprite.setPosition(position);
+}

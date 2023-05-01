@@ -93,9 +93,10 @@ void Game::reset()
                 break;
             case 1:
                 std::cout << "\nPlayer at: " << std::get<0>(tile.first) << "," << std::get<1>(tile.first) << "\n";
+                playerStartPos = sf::Vector2f{std::get<0>(tile.first) * Constants::tileDimension, std::get<1>(tile.first) * Constants::tileDimension};
                 entityManager.create<Player>(
-                    static_cast<float>(std::get<0>(tile.first)) * Constants::tileDimension, 
-                    static_cast<float>(std::get<1>(tile.first)) * Constants::tileDimension);
+                    static_cast<float>(playerStartPos.x), 
+                    static_cast<float>(playerStartPos.y));
                 break;
             case 2:
                 std::cout << "\nBrick at: " << std::get<0>(tile.first) << "," << std::get<1>(tile.first) << "\n";
@@ -151,6 +152,11 @@ void Game::run()
         auto playerPos = entityManager.get_all<Player>()[0]->getPosition();
         view.setCenter(sf::Vector2f{playerPos.x, Constants::window_height / 2.f});
         gameWindow.setView(view);
+
+        if (playerPos.y > Constants::window_height)
+        {
+            entityManager.get_all<Player>()[0]->setPosition(playerStartPos);
+        }
 
         entityManager.refresh();
         entityManager.draw(gameWindow);

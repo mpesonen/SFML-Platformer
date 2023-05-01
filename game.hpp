@@ -75,6 +75,8 @@ public:
 class Game {
     enum class GameState { paused, running };
 
+    sf::Vector2f playerStartPos;
+
     sf::RenderWindow gameWindow{
         sf::VideoMode{sf::Vector2u {Constants::window_width, Constants::window_height}},
         "SFML Platformer"};
