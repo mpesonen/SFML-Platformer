@@ -14,4 +14,6 @@ public:
     static const unsigned char DIRECTION_RIGHT = 2;
     static const unsigned char DIRECTION_BOTTOM = 4;
     static const unsigned char DIRECTION_LEFT = 8;
+
+    static const int playerSize = 72;
 };

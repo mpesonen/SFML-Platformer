@@ -2,19 +2,24 @@
 
 // Initialize static data
 sf::Texture Player::texture;
+sf::IntRect Player::textureRect;
+sf::Clock walkingClock;
 
 Player::Player(float x, float y) : MovingEntity() {
+    textureRect = sf::IntRect(sf::Vector2i(0, 0), sf::Vector2i(72, 72));
     // TODO: file operations might be slow
-    auto success = texture.loadFromFile("./textures/mario1.png");
-    if  (success)
+    auto success = texture.loadFromFile("./textures/mariosheet.png");
+    if (success)
     {
         sprite.setTexture(texture);
+        sprite.setTextureRect(textureRect);
         sprite.setPosition(sf::Vector2f{x, y});
     }
 }
 
 void Player::update()
 {
+    float startVelX = velocity.x;
 
     if (!isCollidingFromBottom())
     {
@@ -24,24 +29,88 @@ void Player::update()
     {
         velocity.y = 0.f;
     }
-
-    float startVel = velocity.x;
-
+    
     processInput();
+
+    if (velocity.x != 0)
+    {
+        direction = velocity.x > 0.f ? 1 : -1;
+    }
 
     int width = sprite.getGlobalBounds().width;
     int height = sprite.getGlobalBounds().height;
 
-    if (velocity.x < 0 && startVel >= 0)
+    // Change sprites
+    if (velocity.y < 0)
     {
-        sprite.setTextureRect(sf::IntRect{sf::Vector2i{width, 0}, sf::Vector2i{-width, height}});
-    } else if (velocity.x > 0 && startVel <= 0)
+        setJumpingSprite(direction);
+    }
+    else
     {
-        sprite.setTextureRect(sf::IntRect{sf::Vector2i{0, 0}, sf::Vector2i{width, height}});
+        if (velocity.x == 0)
+        {
+            setStandingSprite(direction);
+        }
+        else
+        {
+            if (startVelX == 0)
+            {
+                walkingClock.restart();
+            }
+
+            setWalkingSprite(direction);
+        }
     }
 
     // Move the position of the player
     sprite.move(velocity);
+}
+
+void Player::setJumpingSprite(int direction) noexcept
+{
+    const int jumpingSpriteIndex = 5;
+    int leftOffset = direction == 1 ? 0 : Constants::playerSize;
+
+    sprite.setTextureRect(
+        sf::IntRect(
+            sf::Vector2i((jumpingSpriteIndex * Constants::playerSize + leftOffset), 0),
+            sf::Vector2i(direction * Constants::playerSize, Constants::playerSize))
+    );
+}
+
+void Player::setStandingSprite(int direction) noexcept
+{
+    const int standingSpriteIndex = 0;
+    int leftOffset = direction == 1 ? 0 : Constants::playerSize;
+
+    sprite.setTextureRect(
+        sf::IntRect(
+            sf::Vector2i((standingSpriteIndex * Constants::playerSize + leftOffset), 0),
+            sf::Vector2i(direction * Constants::playerSize, Constants::playerSize))
+    );
+}
+
+void Player::setWalkingSprite(int direction) noexcept
+{
+    const int walkingSpriteIndexStart = 1;
+    const float walkingFramesCount = 3.f;
+    const float animationSpeed = 3.f;
+    int leftOffset = direction == 1 ? 0 : Constants::playerSize;
+
+    // Scale seconds by animationspeed
+    float seconds = walkingClock.getElapsedTime().asSeconds() * animationSpeed;
+
+    // Only use fractional part
+    float onlyFractionalPart = (seconds - (long)seconds);
+    // Walk through number of frames
+    int spriteIndex = static_cast<int>(onlyFractionalPart * walkingFramesCount);
+    int walkingSpriteIndex = spriteIndex + walkingSpriteIndexStart;
+
+    sprite.setTextureRect(
+        sf::IntRect(
+            sf::Vector2i((walkingSpriteIndex * Constants::playerSize + leftOffset), 0),
+            sf::Vector2i(direction * Constants::playerSize, Constants::playerSize))
+    );
 }
 
 void Player::draw(sf::RenderWindow& window)

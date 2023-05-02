@@ -9,6 +9,9 @@ private:
   void processInput();
 protected:
     static sf::Texture texture;
+    static sf::IntRect textureRect;
+    sf::Clock walkingClock;
+    int direction = 1;
 public:
     Player(float x, float y);
 
@@ -23,5 +26,9 @@ public:
     void nudgeLeft(float amount) noexcept;
     void nudgeRight(float amount) noexcept;
     void nudgeUp(float amount) noexcept;
-    void nudgeDown(float amount) noexcept; 
+    void nudgeDown(float amount) noexcept;
+
+    void setJumpingSprite(int direction) noexcept;
+    void setWalkingSprite(int direction) noexcept;
+    void setStandingSprite(int direction) noexcept;
 };

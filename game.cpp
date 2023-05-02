@@ -87,7 +87,7 @@ void Game::reset()
         switch (currentTile)
         {
             case 0:
-                std::cout << "\nUnexpected 0 at: " << std::get<0>(tile.first) << "," << std::get<1>(tile.first) << "\n";
+                //std::cout << "\nUnexpected 0 at: " << std::get<0>(tile.first) << "," << std::get<1>(tile.first) << "\n";
                 [[fallthrough]];
             default:
                 break;
