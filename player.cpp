@@ -5,6 +5,9 @@ sf::Texture Player::texture;
 sf::IntRect Player::textureRect;
 sf::Clock walkingClock;
 
+static const float jumpPower = 1.9f;
+static const float jetPackPower = 0.8f;
+
 Player::Player(float x, float y) : MovingEntity() {
     textureRect = sf::IntRect(sf::Vector2i(0, 0), sf::Vector2i(72, 72));
     // TODO: file operations might be slow
@@ -120,7 +123,7 @@ void Player::draw(sf::RenderWindow& window)
 
 void Player::jump() noexcept
 {
-    velocity.y += 2.3f * -Constants::playerSpeed;
+    velocity.y += jumpPower * -Constants::playerSpeed;
 }
 
 void Player::moveDown() noexcept
@@ -168,6 +171,10 @@ void Player::processInput()
         if (!isCollidingFromTop() && isCollidingFromBottom() && velocity.y == 0 && y() >= 0.f)
         {
             jump();
+        }
+        else if (velocity.y < 0.f)
+        {
+            velocity.y += -jetPackPower;
         }
     }
 }
