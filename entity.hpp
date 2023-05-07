@@ -30,6 +30,8 @@ public:
     void destroy() noexcept;
     bool isDestroyed() const noexcept;
 
+    Entity(const sf::Texture& texture);
+    Entity() = delete;
     virtual ~Entity() {}
 };
 
@@ -41,4 +43,7 @@ public:
     virtual void moveDown() noexcept = 0;
     virtual void moveLeft() noexcept = 0;
     virtual void moveRight() noexcept = 0;
+
+    MovingEntity() = delete;
+    MovingEntity(const sf::Texture& texture);
 };

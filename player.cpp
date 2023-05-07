@@ -8,7 +8,8 @@ sf::Clock walkingClock;
 static const float jumpPower = 1.9f;
 static const float jetPackPower = 0.8f;
 
-Player::Player(float x, float y) : MovingEntity() {
+Player::Player(float x, float y) : MovingEntity(texture) 
+{
     textureRect = sf::IntRect(sf::Vector2i(0, 0), sf::Vector2i(72, 72));
     // TODO: file operations might be slow
     auto success = texture.loadFromFile("./textures/mariosheet.png");

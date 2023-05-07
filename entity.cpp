@@ -1,5 +1,13 @@
 #include "entity.hpp"
 
+Entity::Entity(const sf::Texture& texture) : sprite{texture}
+{
+}
+
+MovingEntity::MovingEntity(const sf::Texture& texture) : Entity(texture)
+{
+}
+
 sf::Vector2f Entity::getPosition() const noexcept
 {
     return sprite.getPosition();
