@@ -34,3 +34,10 @@ void handle_collision(Player& player, Brick& brick) {
     }
   }
 }
+
+void handle_collision(Player& player, Coin& coin) {
+    auto collision = player.getGlobalBounds().findIntersection(coin.getGlobalBounds());
+  if (collision.has_value()) {
+    coin.destroy();
+  }
+}

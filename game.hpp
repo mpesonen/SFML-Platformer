@@ -9,6 +9,7 @@
 #include "brick.hpp"
 #include "constants.hpp"
 #include "map.hpp"
+#include "coin.hpp"
 
 using namespace std::literals;
 

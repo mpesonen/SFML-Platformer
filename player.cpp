@@ -11,7 +11,6 @@ static const float jetPackPower = 0.8f;
 Player::Player(float x, float y) : MovingEntity(texture) 
 {
     textureRect = sf::IntRect(sf::Vector2i(0, 0), sf::Vector2i(72, 72));
-    // TODO: file operations might be slow
     auto success = texture.loadFromFile("./textures/mariosheet.png");
     if (success)
     {
@@ -73,24 +72,24 @@ void Player::update()
 void Player::setJumpingSprite(int direction) noexcept
 {
     const int jumpingSpriteIndex = 5;
-    int leftOffset = direction == 1 ? 0 : Constants::playerSize;
+    int leftOffset = direction == 1 ? 0 : Constants::playerPixelSize;
 
     sprite.setTextureRect(
         sf::IntRect(
-            sf::Vector2i((jumpingSpriteIndex * Constants::playerSize + leftOffset), 0),
-            sf::Vector2i(direction * Constants::playerSize, Constants::playerSize))
+            sf::Vector2i((jumpingSpriteIndex * Constants::playerPixelSize + leftOffset), 0),
+            sf::Vector2i(direction * Constants::playerPixelSize, Constants::playerPixelSize))
     );
 }
 
 void Player::setStandingSprite(int direction) noexcept
 {
     const int standingSpriteIndex = 0;
-    int leftOffset = direction == 1 ? 0 : Constants::playerSize;
+    int leftOffset = direction == 1 ? 0 : Constants::playerPixelSize;
 
     sprite.setTextureRect(
         sf::IntRect(
-            sf::Vector2i((standingSpriteIndex * Constants::playerSize + leftOffset), 0),
-            sf::Vector2i(direction * Constants::playerSize, Constants::playerSize))
+            sf::Vector2i((standingSpriteIndex * Constants::playerPixelSize + leftOffset), 0),
+            sf::Vector2i(direction * Constants::playerPixelSize, Constants::playerPixelSize))
     );
 }
 
@@ -99,7 +98,7 @@ void Player::setWalkingSprite(int direction) noexcept
     const int walkingSpriteIndexStart = 1;
     const float walkingFramesCount = 3.f;
     const float animationSpeed = 3.f;
-    int leftOffset = direction == 1 ? 0 : Constants::playerSize;
+    int leftOffset = direction == 1 ? 0 : Constants::playerPixelSize;
 
     // Scale seconds by animationspeed
     float seconds = walkingClock.getElapsedTime().asSeconds() * animationSpeed;
@@ -112,8 +111,8 @@ void Player::setWalkingSprite(int direction) noexcept
 
     sprite.setTextureRect(
         sf::IntRect(
-            sf::Vector2i((walkingSpriteIndex * Constants::playerSize + leftOffset), 0),
-            sf::Vector2i(direction * Constants::playerSize, Constants::playerSize))
+            sf::Vector2i((walkingSpriteIndex * Constants::playerPixelSize + leftOffset), 0),
+            sf::Vector2i(direction * Constants::playerPixelSize, Constants::playerPixelSize))
     );
 }
 

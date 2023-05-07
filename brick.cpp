@@ -5,7 +5,6 @@ sf::Texture Brick::texture;
 
 Brick::Brick(float x, float y) : Entity(texture)
 {
-    // TODO: file operations might be slow
     auto success = texture.loadFromFile("./textures/brick01.png");
     if (success)
     {

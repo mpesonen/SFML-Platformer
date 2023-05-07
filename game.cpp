@@ -88,7 +88,15 @@ void Game::reset()
         {
             case 0:
                 //std::cout << "\nUnexpected 0 at: " << std::get<0>(tile.first) << "," << std::get<1>(tile.first) << "\n";
-                [[fallthrough]];
+                //if (std::get<0>(tile.first) == 10 && std::get<1>(tile.first) == 10)
+                //{
+                    std::cout << "\Coin at: " << std::get<0>(tile.first) << "," << std::get<1>(tile.first) << "\n";
+                    entityManager.create<Coin>(
+                        static_cast<float>(std::get<0>(tile.first)) * Constants::tileDimension, 
+                        static_cast<float>(std::get<1>(tile.first)) * Constants::tileDimension);
+                //}
+                //[[fallthrough]];
+                    break;
             default:
                 break;
             case 1:
@@ -103,7 +111,7 @@ void Game::reset()
                 entityManager.create<Brick>(
                     static_cast<float>(std::get<0>(tile.first)) * Constants::tileDimension, 
                     static_cast<float>(std::get<1>(tile.first)) * Constants::tileDimension);
-                break;
+                break;                
         }
     }
 
@@ -146,6 +154,9 @@ void Game::run()
         entityManager.apply_all<Player>([this](auto& player) {
             entityManager.apply_all<Brick>([&player](auto& brick) {
                 handle_collision(player, brick);
+            });
+            entityManager.apply_all<Coin>([&player](auto& coin) {
+                handle_collision(player, coin);
             });
         });
         
