@@ -11,6 +11,9 @@ private:
     static sf::SoundBuffer jumpBuffer;
     sf::Sound jumpSound;
 
+    static sf::SoundBuffer brickBuffer;
+    sf::Sound brickSound;
+
     SharedResources();
     ~SharedResources() = default;
 public:
@@ -28,4 +31,5 @@ public:
 
     void playCoinSound() noexcept;
     void playJumpSound() noexcept;
+    void playBrickSound() noexcept;
 };
