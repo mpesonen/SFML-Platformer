@@ -3,6 +3,7 @@
 #include "player.hpp"
 #include "brick.hpp"
 #include "coin.hpp"
+#include "sharedresources.hpp"
 #include <cmath>
 
 void handle_collision(Player& player, Brick& brick);

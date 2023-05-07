@@ -11,7 +11,7 @@ public:
     static constexpr float playerHorizontalSpeed{10.0f};
     static const int playerPixelSize = 72;
     static constexpr float playerSpeed {12.0f};
-    static const int coinPixelWidth = 37;
+    static const int coinPixelWidth = 39;
     static const int coinPixelHeight = 32;
 
     // Bitmask for directions. Allows multiple collision directions.

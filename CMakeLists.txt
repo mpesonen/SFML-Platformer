@@ -7,8 +7,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Extra SFML config
-set(CMAKE_OSX_ARCHITECTURES "arm64")
+set(CMAKE_OSX_ARCHITECTURES "arm64") 
 set(SFML_OS_MACOSX ON)
+set(SFML_BUILD_AUDIO ON)
 
 set(EXECUTABLE_NAME sfml-platformer)
 include(FetchContent)
@@ -21,7 +22,8 @@ set(EXECUTABLE_SOURCES
     "map.cpp"
     "player.cpp"
     "interactions.cpp"
-    "coin.cpp")
+    "coin.cpp"
+    "sharedresources.cpp")
 
 set(EXECUTABLE_HEADERS
     "brick.hpp"
@@ -42,7 +44,7 @@ FetchContent_Declare(
     SFML
     GIT_REPOSITORY https://github.com/SFML/SFML
     GIT_TAG fb1cfdc48d37dbb6ce383311ae5805c1f98db5d1 # Master on May 4th 2023 - about version 3.0.0?
-    OVERRIDE_FIND_PACKAGE
+    #OVERRIDE_FIND_PACKAGE
     GIT_SHALLOW TRUE)
 FetchContent_MakeAvailable(SFML)
 include_directories(${SFML_SOURCE_DIR}/include)
@@ -59,9 +61,11 @@ FetchContent_MakeAvailable(nlohmann_json)
 file(COPY maps DESTINATION ${CMAKE_BINARY_DIR})
 file(COPY fonts DESTINATION ${CMAKE_BINARY_DIR})
 file(COPY textures DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY audio DESTINATION ${CMAKE_BINARY_DIR})
 
 target_link_libraries(${EXECUTABLE_NAME} PUBLIC
     sfml-system
     sfml-window
     sfml-graphics
+    sfml-audio
     nlohmann_json::nlohmann_json)

@@ -1,5 +1,6 @@
 #include "coin.hpp"
 
+#include <iostream>
 // Initialize static data
 sf::Texture Coin::texture;
 
@@ -41,4 +42,9 @@ void Coin::update()
             sf::Vector2i((coinSpriteIndex * Constants::coinPixelWidth), 0),
             sf::Vector2i(Constants::coinPixelWidth, Constants::coinPixelHeight))
     );
+}
+
+void Coin::playCoinSound() noexcept
+{
+    SharedResources::Instance().playCoinSound();
 }

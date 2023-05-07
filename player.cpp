@@ -124,6 +124,7 @@ void Player::draw(sf::RenderWindow& window)
 void Player::jump() noexcept
 {
     velocity.y += jumpPower * -Constants::playerSpeed;
+    SharedResources::Instance().playJumpSound();
 }
 
 void Player::moveDown() noexcept

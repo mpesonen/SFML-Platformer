@@ -1,10 +1,17 @@
 #pragma once
 #include <SFML/System/Clock.hpp>
+#include <SFML/Audio.hpp>
 
 class SharedResources
 {
 private:
-    SharedResources() = default;
+    static sf::SoundBuffer coinBuffer;
+    sf::Sound coinSound;
+
+    static sf::SoundBuffer jumpBuffer;
+    sf::Sound jumpSound;
+
+    SharedResources();
     ~SharedResources() = default;
 public:
     sf::Clock gameClock;
@@ -14,8 +21,11 @@ public:
     SharedResources(SharedResources &&) = delete;
     SharedResources & operator=(SharedResources &&) = delete;
 
-    static auto& Instance() {
+    static SharedResources& Instance() {
         static SharedResources instance;
         return instance;
     }
+
+    void playCoinSound() noexcept;
+    void playJumpSound() noexcept;
 };

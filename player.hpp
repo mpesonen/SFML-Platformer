@@ -2,6 +2,7 @@
 
 #include "entity.hpp"
 #include "constants.hpp"
+#include "sharedresources.hpp"
 
 class Player : public MovingEntity
 {

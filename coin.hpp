@@ -3,6 +3,7 @@
 #include "entity.hpp"
 #include "constants.hpp"
 #include "sharedresources.hpp"
+#include <SFML/Audio.hpp>
 
 class Coin : public Entity
 {
@@ -12,4 +13,5 @@ public:
     Coin(float x, float y);
     void draw(sf::RenderWindow& window) override;
     void update() override;
+    void playCoinSound() noexcept;
 };
