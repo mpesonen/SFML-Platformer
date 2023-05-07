@@ -20,4 +20,10 @@ public:
     static const unsigned char DIRECTION_RIGHT = 2;
     static const unsigned char DIRECTION_BOTTOM = 4;
     static const unsigned char DIRECTION_LEFT = 8;
+
+    static const int TILE_NONE = 0;
+    static const int TILE_PLAYER = 1;
+    static const int TILE_BRICK = 2;
+    static const int TILE_BOX = 3;
+    static const int TILE_COIN = 4;
 };

@@ -86,32 +86,32 @@ void Game::reset()
 
         switch (currentTile)
         {
-            case 0:
-                //std::cout << "\nUnexpected 0 at: " << std::get<0>(tile.first) << "," << std::get<1>(tile.first) << "\n";
-                //if (std::get<0>(tile.first) == 10 && std::get<1>(tile.first) == 10)
-                //{
-                    std::cout << "\Coin at: " << std::get<0>(tile.first) << "," << std::get<1>(tile.first) << "\n";
-                    entityManager.create<Coin>(
-                        static_cast<float>(std::get<0>(tile.first)) * Constants::tileDimension, 
-                        static_cast<float>(std::get<1>(tile.first)) * Constants::tileDimension);
-                //}
-                //[[fallthrough]];
-                    break;
+            case Constants::TILE_NONE:
+                [[fallthrough]];
             default:
                 break;
-            case 1:
+            case Constants::TILE_PLAYER:
                 std::cout << "\nPlayer at: " << std::get<0>(tile.first) << "," << std::get<1>(tile.first) << "\n";
                 playerStartPos = sf::Vector2f{std::get<0>(tile.first) * Constants::tileDimension, std::get<1>(tile.first) * Constants::tileDimension};
                 entityManager.create<Player>(
                     static_cast<float>(playerStartPos.x), 
                     static_cast<float>(playerStartPos.y));
                 break;
-            case 2:
+            case Constants::TILE_BRICK:
                 std::cout << "\nBrick at: " << std::get<0>(tile.first) << "," << std::get<1>(tile.first) << "\n";
                 entityManager.create<Brick>(
                     static_cast<float>(std::get<0>(tile.first)) * Constants::tileDimension, 
                     static_cast<float>(std::get<1>(tile.first)) * Constants::tileDimension);
-                break;                
+                break;
+            case Constants::TILE_BOX:
+                std::cout << "\Box (not implemented) at: " << std::get<0>(tile.first) << "," << std::get<1>(tile.first) << "\n";                break;     
+                break;
+            case Constants::TILE_COIN:
+                std::cout << "\Coin at: " << std::get<0>(tile.first) << "," << std::get<1>(tile.first) << "\n";
+                entityManager.create<Coin>(
+                    static_cast<float>(std::get<0>(tile.first)) * Constants::tileDimension, 
+                    static_cast<float>(std::get<1>(tile.first)) * Constants::tileDimension);
+                break;               
         }
     }
 
