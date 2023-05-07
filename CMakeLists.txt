@@ -38,7 +38,7 @@ add_executable(${EXECUTABLE_NAME}
 FetchContent_Declare(
     SFML
     GIT_REPOSITORY https://github.com/SFML/SFML
-    GIT_TAG ea4c448a85fc1a93c71431faf4b4f12efcfe0976 # Master on April 6th 2023 - about version 3.0.0?
+    GIT_TAG fb1cfdc48d37dbb6ce383311ae5805c1f98db5d1 # Master on May 4th 2023 - about version 3.0.0?
     OVERRIDE_FIND_PACKAGE
     GIT_SHALLOW TRUE)
 FetchContent_MakeAvailable(SFML)
