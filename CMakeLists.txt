@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Extra SFML config
-set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64")
+set(CMAKE_OSX_ARCHITECTURES "${CMAKE_SYSTEM_PROCESSOR}")
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(SFML_OS_MACOSX ON)
 endif()
@@ -46,8 +46,7 @@ FetchContent_Declare(
     SFML
     GIT_REPOSITORY https://github.com/SFML/SFML
     GIT_TAG fb1cfdc48d37dbb6ce383311ae5805c1f98db5d1 # Master on May 4th 2023 - about version 3.0.0?
-    #OVERRIDE_FIND_PACKAGE
-    GIT_SHALLOW TRUE)
+    )
 FetchContent_MakeAvailable(SFML)
 include_directories(${SFML_SOURCE_DIR}/include)
 link_directories(${SFML_BINARY_DIR}/lib)
