@@ -91,23 +91,19 @@ void Game::reset()
             default:
                 break;
             case Constants::TILE_PLAYER:
-                //std::cout << "\nPlayer at: " << std::get<0>(tile.first) << "," << std::get<1>(tile.first) << "\n";
                 playerStartPos = sf::Vector2f{std::get<0>(tile.first) * Constants::tileDimension, std::get<1>(tile.first) * Constants::tileDimension};
                 entityManager.create<Player>(
                     static_cast<float>(playerStartPos.x), 
                     static_cast<float>(playerStartPos.y));
                 break;
             case Constants::TILE_BRICK:
-                //std::cout << "\nBrick at: " << std::get<0>(tile.first) << "," << std::get<1>(tile.first) << "\n";
                 entityManager.create<Brick>(
                     static_cast<float>(std::get<0>(tile.first)) * Constants::tileDimension, 
                     static_cast<float>(std::get<1>(tile.first)) * Constants::tileDimension);
                 break;
             case Constants::TILE_BOX:
-                //std::cout << "\nBox (not implemented) at: " << std::get<0>(tile.first) << "," << std::get<1>(tile.first) << "\n";                break;     
                 break;
             case Constants::TILE_COIN:
-                //std::cout << "\nCoin at: " << std::get<0>(tile.first) << "," << std::get<1>(tile.first) << "\n";
                 entityManager.create<Coin>(
                     static_cast<float>(std::get<0>(tile.first)) * Constants::tileDimension, 
                     static_cast<float>(std::get<1>(tile.first)) * Constants::tileDimension);
